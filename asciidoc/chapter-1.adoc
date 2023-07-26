@@ -1,0 +1,11 @@
+= Chapter Title
+ 
+A paragraph with *bold* and _italic_ text.
+ 
+.Image title
+image::an-image.jpg[align=center]
+ 
+The `xref` macro is used for source-to-source links, like xref:a-book.adoc[].
+An external link to https://eclipse.org[Eclipse].
+ 
+NOTE: One of five built-in admonition block types.
