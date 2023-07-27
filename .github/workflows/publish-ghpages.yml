@@ -25,7 +25,7 @@ jobs:
       - name: Install mdbook
         run: cargo install mdbook
       - name: Build # build
-        run: mkbook build
+        run: mdbook build
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
