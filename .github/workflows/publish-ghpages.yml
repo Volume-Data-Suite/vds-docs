@@ -1,0 +1,35 @@
+name: mdbook-ghpages
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+    contents: write # for committing to gh-pages branch.
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+    # This workflow contains a single job called "build"
+    build:
+      # The type of runner that the job will run on
+      runs-on: ubuntu-latest
+  
+      # Steps represent a sequence of tasks that will be executed as part of the job
+      steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Rust Cache # cache the rust build artefacts
+        uses: Swatinem/rust-cache@v1
+      - name: Install mdbook
+        run: cargo install mdbook
+      - name: Build # build
+        run: mkbook build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+            folder: book
+            # this option will not maintain any history of your previous pages deployment
+            # set to false if you want all page build to be committed to your gh-pages branch history
+            single-commit: true
