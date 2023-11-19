@@ -46,20 +46,19 @@ Framebuffer coordinates adress pixels in the framebuffer and have two dimensions
 Other graphics APIs like OpenGL and Vulkan use different coordinate systems. This section aims to highlight the differences between those coordinate systems to mitigate misunderstandings.
 
 ### WebGPU & DirectX & Metal
-**NDC:** +Y is up. Point(-1, -1) is at the bottom left corner.\
-**Framebuffer coordinate:** +Y is down. Origin(0, 0) is at the top left corner.\
-**Z-Values coordinate:** +Z is into the screen. Z=0 is at screen and represents the closest distance. Maximum distance is ???.\
-**2D Texture coordinate:** +Y is down. Origin(0, 0) is at the top left corner.
+**NDC:** +Y is up. Point (-1, -1) is at the bottom left corner.\
+**Framebuffer coordinates:** +Y is down. Origin (0, 0) is at the top left corner.\
+**2D Texture coordinates:** +Y is down. Origin (0, 0) is at the top left corner.
 
 ### OpenGL & OpenGL ES & WebGL
-**NDC:** +Y is up. Point(-1, -1) is at the bottom left corner.\
-**Framebuffer coordinate:** +Y is up. Origin(0, 0) is at the bottom left corner.\
-**2D Texture coordinate:** +Y is up. Origin(0, 0) is at the bottom left corner.
+**NDC:** +Y is up. Point (-1, -1) is at the bottom left corner.\
+**Framebuffer coordinates:** +Y is up. Origin (0, 0) is at the bottom left corner.\
+**2D Texture coordinates:** +Y is up. Origin (0, 0) is at the bottom left corner.
 
 ### Vulkan
-**NDC:** +Y is down. Point(-1, -1) is at the top left corner.\
-**Framebuffer coordinate:** +Y is down. Origin(0, 0) is at the bottom left corner.\
-**2D Texture coordinate:** +Y is up. Origin(0, 0) is at the bottom left corner.
+**NDC:** +Y is down. Point (-1, -1) is at the top left corner.\
+**Framebuffer coordinates:** +Y is down. Origin (0, 0) is at the bottom left corner.\
+**2D Texture coordinates:** +Y is up. Origin (0, 0) is at the bottom left corner.
 
 ## 3D Volume Scaling
 
