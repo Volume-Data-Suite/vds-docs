@@ -48,7 +48,7 @@ RAS                                                                             
 LSA                                                                                  | R->L within I->S within P->A | "Saggital"                                                                                   |
 LIA                                                                                  | R->L within S->I within P->A | "Coronal"
 
-> If you select the wrong voxel order while importing a RAW 3D file, then you might see the volume rotated or mirrored along any of the spatial axes of the volume and not mapped correctly to the [Axes for Spatial Coordinates](/about_volume_data.html#axes-for-spatial-coordinates) .
+> If you select the wrong voxel order while importing a RAW 3D file, then you might see the volume rotated or mirrored along any of the spatial axes of the volume and not mapped correctly to the [Axes for Spatial Coordinates](/about_volume_data.html#axes-for-spatial-coordinates).
 
 ### Converting RAW 3D File Voxel Ordering to an In-Memory Array
 

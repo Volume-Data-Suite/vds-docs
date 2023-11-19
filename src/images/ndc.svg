@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<svg width="453" height="394" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+ <g class="layer">
+  <title>Layer 1</title>
+  <rect fill="none" height="284" id="svg_3" stroke="#000000" width="284" x="37.83" y="92.13"/>
+  <rect fill="none" height="284" id="svg_4" stroke="#000000" width="284" x="126.83" y="18.63"/>
+  <line fill="none" id="svg_5" stroke="#000000" x1="126.58" x2="37.83" y1="18.5" y2="92"/>
+  <line fill="none" id="svg_6" stroke="#000000" x1="411.08" x2="321.83" y1="18.75" y2="92.5"/>
+  <line fill="none" id="svg_7" stroke="#000000" x1="411.08" x2="322.08" y1="302.5" y2="376.25"/>
+  <line fill="none" id="svg_8" stroke="#000000" x1="127.08" x2="37.83" y1="302.75" y2="376.25"/>
+  <line fill="none" id="svg_9" stroke="#000000" x1="266.95" x2="194.2" y1="169.5" y2="229.25"/>
+  <circle cx="193.33" cy="230" fill="#000000" id="svg_15" r="5.27" stroke="#000000"/>
+  <circle cx="272.83" cy="164.37" fill="#000000" id="svg_16" r="5.27" stroke="#000000"/>
+  <line fill="none" id="svg_17" stroke="#000000" x1="267.03" x2="263.93" y1="169.43" y2="179.53"/>
+  <line fill="none" id="svg_18" stroke="#000000" x1="266.83" x2="256.73" y1="169.43" y2="171.53"/>
+  <text fill="#000000" font-family="Serif" font-size="11" id="svg_20" stroke="#000000" stroke-width="0" text-anchor="middle" x="21.08" xml:space="preserve" y="388.63">(-1, -1, 0)</text>
+  <text fill="#000000" font-family="Serif" font-size="11" id="svg_21" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="337.58" xml:space="preserve" y="390.5">(1, -1, 0)</text>
+  <text fill="#000000" font-family="Serif" font-size="11" id="svg_22" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="434.08" xml:space="preserve" y="295">(1, -1, 1)</text>
+  <text fill="#000000" font-family="Serif" font-size="11" id="svg_23" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="101.08" xml:space="preserve" y="295.5">(-1, -1, 1)</text>
+  <text fill="#000000" font-family="Serif" font-size="11" id="svg_24" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="193.08" xml:space="preserve" y="250.5">(0, 0, 0)</text>
+  <text fill="#000000" font-family="Serif" font-size="11" id="svg_25" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="284.58" xml:space="preserve" y="149">(0, 0, 1)</text>
+  <text fill="#000000" font-family="Serif" font-size="11" id="svg_26" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="351.58" xml:space="preserve" y="104">(1, 1, 0)</text>
+  <text fill="#000000" font-family="Serif" font-size="11" id="svg_27" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="22.08" xml:space="preserve" y="81">(-1, 1, 0)</text>
+  <text fill="#000000" font-family="Serif" font-size="11" id="svg_28" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="114.08" xml:space="preserve" y="10.5">(-1, 1, 1)</text>
+  <text fill="#000000" font-family="Serif" font-size="11" id="svg_29" stroke="#000000" stroke-width="0" text-anchor="middle" x="418.08" xml:space="preserve" y="10">(1, 1, 1)</text>
+ </g>
+</svg>
