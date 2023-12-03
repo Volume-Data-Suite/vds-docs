@@ -4,9 +4,9 @@
 
 A voxel is like a three-dimensional pixel that represents a value on a regular grid in three-dimensional space. It is analogous to a pixel, which represents a value on a regular two-dimensional space, like a 2D image.
 
-| <img src="images/voxels.svg" alt="Voxels" width="200"/> 
+| <img src="images/voxels_large.svg" alt="Voxels"/> 
 | :--------------------------------------:
-| _3D voxel grid with a highlighted voxel_
+| _3D voxel grid with two highlighted voxel_
 
 When dealing with 3D MRI or 3D CT images, a voxel value usually represents a itensity value (also known as ISO value).
 
