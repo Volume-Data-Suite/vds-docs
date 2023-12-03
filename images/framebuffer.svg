@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<svg width="625" height="380" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+
+ <g class="layer">
+  <title>Layer 1</title>
+  <rect fill="#aaffff" height="293" id="svg_5" stroke="#000000" width="472" x="93.74" y="33.5"/>
+  <line fill="none" id="svg_7" stroke="#000000" x1="93.74" x2="93.74" y1="33.75" y2="356.85"/>
+  <line fill="none" id="svg_8" stroke="#000000" x1="93.74" x2="594.24" y1="33.25" y2="33.25"/>
+  <line fill="none" id="svg_9" stroke="#000000" x1="93.59" x2="86.09" y1="356.75" y2="345.05"/>
+  <line fill="none" id="svg_10" stroke="#000000" x1="93.89" x2="100.89" y1="356.85" y2="345.15"/>
+  <line fill="none" id="svg_11" stroke="#000000" x1="594.09" x2="581.64" y1="33.15" y2="24.3"/>
+  <line fill="none" id="svg_13" stroke="#000000" x1="593.99" x2="582.44" y1="33.45" y2="42.4"/>
+  <text fill="#000000" font-family="Serif" font-size="24" id="svg_14" stroke="#000000" stroke-width="0" text-anchor="middle" x="63.99" xml:space="preserve" y="38.5">(0, 0)</text>
+  <text fill="#000000" font-family="Serif" font-size="24" id="svg_15" stroke="#000000" stroke-width="0" text-anchor="middle" transform="matrix(1 0 0 1 -48 1.5)" x="579.49" xml:space="preserve" y="20">(1920, 0)</text>
+  <text fill="#000000" font-family="Serif" font-size="24" id="svg_16" stroke="#000000" stroke-width="0" text-anchor="middle" x="43.99" xml:space="preserve" y="335.5">(0, 1080)</text>
+  <text fill="#000000" font-family="Serif" font-size="24" id="svg_17" stroke="#000000" stroke-width="0" text-anchor="middle" x="612.5" xml:space="preserve" y="38.88">+x</text>
+  <text fill="#000000" font-family="Serif" font-size="24" id="svg_18" stroke="#000000" stroke-width="0" text-anchor="middle" x="91.5" xml:space="preserve" y="373.88">+y</text>
+ </g>
+</svg>

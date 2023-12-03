@@ -1,0 +1,462 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Volume Data Suite Documentation</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="supported_plattforms.html"><strong aria-hidden="true">2.</strong> Supported Plattforms</a></li><li class="chapter-item expanded "><a href="about_volume_data.html"><strong aria-hidden="true">3.</strong> About Volume Data</a></li><li class="chapter-item expanded "><a href="importing_static_volume_data.html"><strong aria-hidden="true">4.</strong> Importing Static Volume Data</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="file_format_raw_3d.html"><strong aria-hidden="true">4.1.</strong> File Format: RAW 3D</a></li></ol></li><li class="chapter-item expanded "><a href="visualization.html"><strong aria-hidden="true">5.</strong> Visualization</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="render_backend.html"><strong aria-hidden="true">5.1.</strong> Render Backend</a></li></ol></li><li class="chapter-item expanded "><a href="development.html"><strong aria-hidden="true">6.</strong> Development</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Volume Data Suite Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>Volume Data Suite (VDS) is a free and open source app that can be used to visualize and interact with volumetric image data.</p>
+<p>View the web demo app online at <a href="https://online.volumedatasuite.com">https://online.volumedatasuite.com</a> or download the <a href="https://github.com/Volume-Data-Suite/vds/releases">latest native version</a> for your plattform.</p>
+<h2 id="status"><a class="header" href="#status">Status</a></h2>
+<p>VDS is currently nothing more than a proof of concept and in a very early pre-alpha state. There are many features I want to add, and the API and User Interface is still evolving. <em>Expect breaking changes!</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="supported-plattforms"><a class="header" href="#supported-plattforms">Supported Plattforms</a></h1>
+<h2 id="cross-platform-support"><a class="header" href="#cross-platform-support">Cross-Platform Support</a></h2>
+<p>Currently the following graphics APIs are supported:</p>
+<ul>
+<li>Windows (Vulkan and DirectX)</li>
+<li>macOS (Metal)</li>
+<li>Linux (Vulkan)</li>
+<li>Web (WebGPU)</li>
+</ul>
+<h2 id="web-plattform-restrictions"><a class="header" href="#web-plattform-restrictions">Web Plattform restrictions:</a></h2>
+<p><strong><em>WebGL</em></strong> is currrently not supported due to significant performance reductions. Make sure that you use the latest version of your web browser and check its <strong><em>WebGPU</em></strong> support, if you want to use the web based version of VDS. The latest versions of Chromium based browsers like Google Chrome, Microsoft Edge and Chromium itself should work.</p>
+<p><strong><em>Direct file system access</em></strong> is currently <a href="https://stackoverflow.com/questions/71017592/can-i-read-files-from-the-disk-by-using-webassembly-re-evaluated">not possible</a> with WebAssembly (WASM). Therefore files can only be opened via drag and drop or by downloading them from a URL and not all file types are supported. Files can only be exported as a download.</p>
+<p><strong><em>Gerneral Perfomance</em></strong> is better on native versions of VDS that run directly on the operating system and not inside a web browser. Main reason are missing <a href="https://en.wikipedia.org/wiki/Single_instruction,_multiple_data">SIMD</a> like <em>f16c</em> on x86 or <em>fp16</em> on arm64 which are not available in WASM.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="about-volume-data"><a class="header" href="#about-volume-data">About Volume Data</a></h1>
+<h2 id="3d-images-and-voxels"><a class="header" href="#3d-images-and-voxels">3D Images and Voxels</a></h2>
+<p>A voxel is like a three-dimensional pixel that represents a value on a regular grid in three-dimensional space. It is analogous to a pixel, which represents a value on a regular two-dimensional space, like a 2D image.</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center"><img src="images/voxels_large.svg" alt="Voxels"/></th></tr></thead><tbody>
+<tr><td style="text-align: center"><em>3D voxel grid with two highlighted voxel</em></td></tr>
+</tbody></table>
+</div>
+<p>When dealing with 3D MRI or 3D CT images, a voxel value usually represents a itensity value (also known as ISO value).</p>
+<h2 id="orientation-and-voxel-order-terminology"><a class="header" href="#orientation-and-voxel-order-terminology">Orientation and Voxel-Order Terminology</a></h2>
+<h3 id="basic-direction-terms"><a class="header" href="#basic-direction-terms">Basic Direction Terms</a></h3>
+<p><strong>Directions are given relative to the patient or object.</strong> (&quot;Right&quot; is patient's or object's right.) When referring to a location on a screen, it is important to be precise. For instance, patient-right can be located on the left side of the screen. We use the following terms:</p>
+<div class="table-wrapper"><table><thead><tr><th>Directions</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>R</strong>ight &lt;-&gt; <strong>L</strong>eft</td><td>Patient's right ear &lt;-&gt; patient's left ear</td></tr>
+<tr><td><strong>A</strong>nterior &lt;-&gt; <strong>P</strong>osterior</td><td>Patient's nose &lt;-&gt; patient's back of the head</td></tr>
+<tr><td><strong>I</strong>nferior &lt;-&gt; <strong>S</strong>uperior</td><td>Patient's jaw &lt;-&gt; patient's skullcap</td></tr>
+</tbody></table>
+</div><div class="table-wrapper"><table><thead><tr><th><img src="images/3D_coordinate_system.svg" alt="3D Coordinate System" width="310"/></th><th><img src="images/head.png" alt="Head Reference" /></th></tr></thead><tbody>
+<tr><td>3D Coordinate System</td><td>Head Reference</td></tr>
+</tbody></table>
+</div>
+<blockquote>
+<p>The terms <strong>&quot;up&quot;, &quot;down&quot;, &quot;front&quot;, &quot;back&quot;</strong> are not used because they have ambiguous meanings when dealing with patients in different orientations (e.g. lying down).</p>
+</blockquote>
+<h3 id="axes-for-spatial-coordinates"><a class="header" href="#axes-for-spatial-coordinates">Axes for Spatial Coordinates</a></h3>
+<p>To describe locations in space around volume data, we need to agree on a specific set of axes. These axes are used to describe a point's coordinates. There are three axes that could be used in any order, and either direction could be positive. This gives us a total of 48 possible axis schemes.</p>
+<p>It seems that three of these schemes are most popular:</p>
+<div class="table-wrapper"><table><thead><tr><th><img src="images/3D_coordinate_system_ras.svg" alt="3D Coordinate System" /></th><th><img src="images/3D_coordinate_system_las.svg" alt="3D Coordinate System" /></th><th><img src="images/3D_coordinate_system_las.svg" alt="3D Coordinate System" /></th><th><img src="images/head.png" alt="Head Reference" /></th></tr></thead><tbody>
+<tr><td><strong>RAS</strong> (&quot;Neurological&quot; convention)<br />+X = R<br />+Y = A<br />+Z = S</td><td><strong>LAS</strong> (&quot;Radiological&quot; convention)<br />+X = L<br />+Y = A<br />+Z = S</td><td><strong>LSA</strong> (&quot;Math&quot; convention)<br />+X = L<br />+Y = S<br />+Z = A</td><td>Head Reference</td></tr>
+</tbody></table>
+</div>
+<blockquote>
+<p><strong>Viewing Direction:</strong> The figures above are shown as viewed looking toward the patient’s face. However, there are also conventions for viewing, such as the neurological view, which is from above/behind the patient and shows patient left on screen left.</p>
+</blockquote>
+<p>The RAS coordinate system is a right-hand coordinate system (thumb = R, 2nd finger = A, middle finger = S.). On the other hand, LAS is a left-hand coordinate system.</p>
+<p>The L, A and S axes could provide a right-hand coordinate system if used in the order LSA for example. A right-hand coordinate system is customarily used when performing matrix and vector math and is more attractive for computer graphics developers and APIs. This is why VDS uses LSA internally. However, it seems like no one uses LSA when talking about volume data in a medical context. Therefore you can view volume data in various different coordinate systems (RAS, LAS, LSA).</p>
+<h3 id="planes-for-volume-slice-orientation"><a class="header" href="#planes-for-volume-slice-orientation">Planes for Volume Slice Orientation</a></h3>
+<p>There are three commonly used slice planes:</p>
+<ul>
+<li>Axial (Transverse): R-L x A-P plane</li>
+<li>Coronal: R-L x S-I plane</li>
+<li>Sagittal: A-P x S-I plane</li>
+</ul>
+<p>The viewing direction on each plane depends on the axis convention used, such as <strong>RAS</strong>, <strong>LAS</strong>, or <strong>LSA</strong>.</p>
+<div class="table-wrapper"><table><thead><tr><th><img src="images/3D_coordinate_system_axial.svg" alt="3D Coordinate System with Axial Plane" /></th><th><img src="images/3D_coordinate_system_coronal.svg" alt="3D Coordinate System with Coronal Plane" /></th><th><img src="images/3D_coordinate_system_sagittal.svg" alt="3D Coordinate System with Sagittal Plane" /></th><th><img src="images/3D_coordinate_system_planes.svg" alt="3D Coordinate System with all planes" /></th><th><img src="images/head.png" alt="Head Reference" /></th></tr></thead><tbody>
+<tr><td>Axial (Traverse)</td><td>Coronal</td><td>Sagittal</td><td>All Planes</td><td>Head Reference</td></tr>
+</tbody></table>
+</div>
+<h2 id="volume-data-representation-in-vds"><a class="header" href="#volume-data-representation-in-vds">Volume Data Representation in VDS</a></h2>
+<p>VDS maps intensity values internally to a floating point range of 0.0 to 1.0 with a 16 bit presicion, where 0.0 represents the lowest possible intensity value and 1.0 represents the highest possible intensity value.</p>
+<h2 id="great-resources"><a class="header" href="#great-resources">Great Resources</a></h2>
+<p>In case you are interested in more information about volume data, you may also be interested in reading the following articles:</p>
+<ul>
+<li><a href="http://www.grahamwideman.com/gw/brain/orientation/orientterms.htm">Orientation and Voxel-Order Terminology: RAS, LAS, LPI, RPI, XYZ and All That</a> by Graham Wideman</li>
+<li><a href="https://afni.nimh.nih.gov/pub/dist/doc/htmldoc/index.html">AFNI Documentation</a> is a set of free and open source, which specalized on human brain MRI scans and is way more advanced than VDS. Its documentation goes way more in depth on various volume data information.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="importing-static-volume-data"><a class="header" href="#importing-static-volume-data">Importing Static Volume Data</a></h1>
+<p>Currenltly the following file formats can be imported:</p>
+<ul>
+<li><a href="/file_format_raw_3d.html">RAW 3D</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="file-format-raw-3d"><a class="header" href="#file-format-raw-3d">File Format: RAW 3D</a></h1>
+<p>RAW 3D files are just plain 3D arrays of voxel value data. These files do not contain a header with metadata on how to read or interpret the data. While VDS has a well defined <a href="/about_volume_data.html#volume-data-representation-in-vds">Volume Data Representation</a>, there is no universal applicable standard for memory layout, number type, voxel order, endianess and so on when storing volume data. Therefore, you need to provide the nessesary metadata on how to read and interpret the data when importing a RAW 3D file.</p>
+<h2 id="typical-file-extensions"><a class="header" href="#typical-file-extensions">Typical file extensions:</a></h2>
+<ul>
+<li>*.raw</li>
+<li>*.RAW</li>
+</ul>
+<h2 id="supported-number-types-for-voxels"><a class="header" href="#supported-number-types-for-voxels">Supported Number Types for Voxels</a></h2>
+<p>Each voxel value can be stored as a signed integer, an unsigned integer or as a floating point number. Each of these number types can be stored with various amounts of bits per number, which is known as <em>&quot;precision&quot;</em>. A higher precision usually means more details in the image data at the cost of larger file sizes. The following number types are supported by VDS when importing a RAW 3D file:</p>
+<div class="table-wrapper"><table><thead><tr><th>ID</th><th>Number Type</th><th>Precision</th></tr></thead><tbody>
+<tr><td>u8</td><td>Unsigned Integer</td><td>8 Bit</td></tr>
+<tr><td>u16</td><td>Unsigned Integer</td><td>16 Bit</td></tr>
+<tr><td>i8</td><td>Signed Integer</td><td>8 Bit</td></tr>
+<tr><td>i16</td><td>Signed Integer</td><td>16 Bit</td></tr>
+<tr><td>f16</td><td>Floating Point Number</td><td>16 Bit</td></tr>
+</tbody></table>
+</div>
+<blockquote>
+<p>Internally, VDS always converts voxel values to f16 before beeing operated on.</p>
+</blockquote>
+<h2 id="scaling"><a class="header" href="#scaling">Scaling</a></h2>
+<p>VDS supports uniform and non-uniform spacing with different scaling factors for each axis. Non-linear scaling is not supported.</p>
+<h2 id="voxel-ordering"><a class="header" href="#voxel-ordering">Voxel Ordering</a></h2>
+<p>Some file formats like RAW 3D do not store metadata about the coordinate system. It could be possible, that for example the RAW 3D files content was stored in RAS but the VDS viewer is configured to use LAS.</p>
+<p><strong>Storage Orders</strong> desribe the voxel ordering. </p>
+<p>Here is an example for the Storage Order for <strong>LAS</strong> which would be <em>&quot;R-&gt;L within P-&gt;A within I-&gt;S&quot;</em> and means:</p>
+<ol>
+<li>Voxels ordered from right to left to store a row</li>
+<li>Rows ordered from posterior to anterior to store a slice</li>
+<li>Slices stored from inferior to superior to store a volume</li>
+</ol>
+<p>By selecting the correct Storage Order, the axis of the file data coordinate system will be mapped correctly to configured VDS viewing coordinate system.</p>
+<p>VDS supportes the following voxel orderings for RAW 3D files:</p>
+<div class="table-wrapper"><table><thead><tr><th><a href="/about_volume_data.html#axes-for-spatial-coordinates">Axes for Spatial Coordinates</a></th><th>Storage order in file</th><th><a href="/about_volume_data.html#planes-for-volume-slice-orientation">Slice orientation</a> (ambiguous)</th><th>Known as</th></tr></thead><tbody>
+<tr><td>LAS</td><td>R-&gt;L within P-&gt;A within I-&gt;S</td><td>&quot;Axial&quot;</td><td>Radiological</td></tr>
+<tr><td>RAS</td><td>L-&gt;R within P-&gt;A within I-&gt;S</td><td>&quot;Axial&quot;</td><td>Neurological</td></tr>
+<tr><td>LSA</td><td>R-&gt;L within I-&gt;S within P-&gt;A</td><td>&quot;Saggital&quot;</td><td></td></tr>
+<tr><td>LIA</td><td>R-&gt;L within S-&gt;I within P-&gt;A</td><td>&quot;Coronal&quot;</td><td></td></tr>
+</tbody></table>
+</div>
+<blockquote>
+<p>If you select the wrong voxel order while importing a RAW 3D file, then you might see the volume rotated or mirrored along any of the spatial axes of the volume and not mapped correctly to the <a href="/about_volume_data.html#axes-for-spatial-coordinates">Axes for Spatial Coordinates</a>.</p>
+</blockquote>
+<h3 id="converting-raw-3d-file-voxel-ordering-to-an-in-memory-array"><a class="header" href="#converting-raw-3d-file-voxel-ordering-to-an-in-memory-array">Converting RAW 3D File Voxel Ordering to an In-Memory Array</a></h3>
+<p>Most RAW 3D files are stored as <a href="/about_volume_data.html#axes-for-spatial-coordinates">RAS</a>:</p>
+<ol>
+<li><em>X increases from Left to Right</em></li>
+<li><em>Y increases from Posterior to Anterior</em></li>
+<li><em>Z increases from Inferior to Superior</em></li>
+</ol>
+<p>A naive approach to actually read an RAW 3D file into memory in one big blob and treat it as an array would probably result in a wrong access pattern like: Voxels[ X ][ Y ][ Z ].</p>
+<p>Popular programming languages like C/C++/Rust use the first index as the slowest-incrementing index into memory. The correct access pattern for this example would be Voxels[ Z ][ Y ][ X ].</p>
+<h2 id="alignment-to-axes-for-spatial-coordinates"><a class="header" href="#alignment-to-axes-for-spatial-coordinates">Alignment to Axes for Spatial Coordinates</a></h2>
+<p>Sometimes the voxel data in RAW 3D files is not aligned to some exact orthogonal directions. Nonetheless, it's useful to know which set of axes the voxel indices correspond to most closely, as this helps when applying alignment or rotation steps.</p>
+<p>Furthermore, the location of the origin is unkown. Even if we know the origin voxel, the location of the origin can be centered in the middle of this central voxel, or on the one of its eight corners.</p>
+<p>VDS defaults the origin for RAW 3D files to the center of the volume 3D dimensions after the <a href="file_format_raw_3d.html#scaling">Scaling</a> is applied.</p>
+<h2 id="multiple-volumes-in-a-single-file"><a class="header" href="#multiple-volumes-in-a-single-file">Multiple volumes in a single file</a></h2>
+<p>Multiple volumes in a single file could be used for multiple time points. VDS does not support multiple volumes in a single file when importing a RAW 3D file.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="visualization"><a class="header" href="#visualization">Visualization</a></h1>
+<p>Currently the volume data can be visualized as:</p>
+<ul>
+<li>2D Slices </li>
+</ul>
+<!-- TODO: Write about Windowing ## Windowing https://radiopaedia.org/articles/windowing-ct https://regionstraumapro.com/post/16349545265 https://imagej.nih.gov/ij/plugins/ct-window-level/index.html https://www.sciencedirect.com/topics/medicine-and-dentistry/hounsfield-scale https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5422232/ https://dicom.nema.org/medical/dicom/2017a/output/chtml/part03/sect_C.11.2.html -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="render-backend"><a class="header" href="#render-backend">Render Backend</a></h1>
+<p>VDS uses the <a href="https://wgpu.rs/">wgpu</a> graphics API to render all visualizations. Shaders are written in the <a href="https://gpuweb.github.io/gpuweb/wgsl/">WebGPU Shading Language</a> also known as <code>WGSL</code> and can be translated to various native graphics APIs like Vulkan, DirectX or Metal. This is why VDS supports so many different plattforms listed on <a href="/supported_plattforms.html">Supported Plattforms</a>.</p>
+<h2 id="wgpu-coordinate-system"><a class="header" href="#wgpu-coordinate-system">wgpu Coordinate System</a></h2>
+<p>Since all graphics pipelines are written with wgpu and WGSL, the underlying <a href="https://www.w3.org/TR/webgpu/#coordinate-systems">coordinate system is the one from WebGPU</a>, which is identical to the coordinate system of DirectX and Metal.</p>
+<blockquote>
+<p>Note: All custom shaders must be compliant with the WebGPU coordinate system, no matter which graphic API backend is used by the plattform. All coordinates will be transformed by wgpu to match the plattform graphics API coordinate system. So do not assume the coordinate system of for example Vulkan when VDS uses Vulkan as render backend.</p>
+</blockquote>
+<h3 id="normalized-device-coordinate-system"><a class="header" href="#normalized-device-coordinate-system">Normalized device coordinate system</a></h3>
+<p>Normalized device coordinates use a <code>left-handed coordinate system</code> and map to positions in the viewport. These coordinates are independent of viewport size. The bottom-left corner is at (-1.0, -1.0, z). Positive-z values point away from the camera (&quot;into the screen&quot;) and are clipped between 0.0 and 1.0.</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center"><img src="images/ndc.svg" alt="Normalized device coordinate system"/></th></tr></thead><tbody>
+<tr><td style="text-align: center"><em>Normalized device coordinate system</em></td></tr>
+</tbody></table>
+</div>
+<h3 id="framebuffer-coordinate-system"><a class="header" href="#framebuffer-coordinate-system">Framebuffer coordinate system</a></h3>
+<p>Framebuffer coordinates adress pixels in the framebuffer and have two dimensions (x, y). Those dimensions are not normalized, so each pixel extends 1 unit in x and y dimensions. The top-left corner is at (0, 0).</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center"><img src="images/framebuffer.svg" alt="Framebuffer coordinate system"/></th></tr></thead><tbody>
+<tr><td style="text-align: center"><em>Framebuffer coordinate system</em></td></tr>
+</tbody></table>
+</div>
+<h3 id="2d-texture-coordinates"><a class="header" href="#2d-texture-coordinates">2D Texture Coordinates</a></h3>
+<p>2D textures us a normalized coordinate system. The origin of a 2D texture is a the top-left corner with +Y facing down. Sometimes uv coordinates are used to describe a texture coordinate, where (u, v) is equal to (x, y).</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center"><img src="images/2d_texture_coordinates.svg" alt="2D texture coordinates"/></th></tr></thead><tbody>
+<tr><td style="text-align: center"><em>2D texture coordinates</em></td></tr>
+</tbody></table>
+</div>
+<h3 id="3d-texture-coordinates"><a class="header" href="#3d-texture-coordinates">3D Texture Coordinates</a></h3>
+<p>3D textures us a normalized coordinate system. The origin of a 3D texture is a the top-left-front corner with +Y facing down and +Z facing back, similiar to <a href="https://learn.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-textures-intro#3d-textures">DirectX 11</a>. Sometimes uvw coordinates are used to describe a texture coordinate, where (u, v, w) is equal to (x, y, z).</p>
+<h2 id="differnces-to-other-apis-like-opengl-and-vulkan"><a class="header" href="#differnces-to-other-apis-like-opengl-and-vulkan">Differnces to other APIs like OpenGL and Vulkan</a></h2>
+<p>Other graphics APIs like OpenGL and Vulkan use different coordinate systems. This section aims to highlight the differences between those coordinate systems to mitigate misunderstandings.</p>
+<h3 id="webgpu--directx--metal"><a class="header" href="#webgpu--directx--metal">WebGPU &amp; DirectX &amp; Metal</a></h3>
+<p><strong>NDC:</strong> +Y is up. Point (-1, -1) is at the bottom left corner.<br />
+<strong>Framebuffer coordinates:</strong> +Y is down. Origin (0, 0) is at the top left corner.<br />
+<strong>2D Texture coordinates:</strong> +Y is down. Origin (0, 0) is at the top left corner.</p>
+<h3 id="opengl--opengl-es--webgl"><a class="header" href="#opengl--opengl-es--webgl">OpenGL &amp; OpenGL ES &amp; WebGL</a></h3>
+<p><strong>NDC:</strong> +Y is up. Point (-1, -1) is at the bottom left corner.<br />
+<strong>Framebuffer coordinates:</strong> +Y is up. Origin (0, 0) is at the bottom left corner.<br />
+<strong>2D Texture coordinates:</strong> +Y is up. Origin (0, 0) is at the bottom left corner.</p>
+<h3 id="vulkan"><a class="header" href="#vulkan">Vulkan</a></h3>
+<p><strong>NDC:</strong> +Y is down. Point (-1, -1) is at the top left corner.<br />
+<strong>Framebuffer coordinates:</strong> +Y is down. Origin (0, 0) is at the bottom left corner.<br />
+<strong>2D Texture coordinates:</strong> +Y is up. Origin (0, 0) is at the bottom left corner.</p>
+<h2 id="3d-volume-scaling"><a class="header" href="#3d-volume-scaling">3D Volume Scaling</a></h2>
+<p>VDS only supports uniform and non-uniform volume data that is represented as a regular grid of voxels. This means, that each that the distance between all voxels must be identical on the same axis.</p>
+<!-- TODO: include visual examples here -->
+<p>Not supported a irregular or non-linear distance between voxels along either axis.</p>
+<p>During the import process, the bounding box of the volume data is normalized. This means, that aspect ratio of the volume is applied to the bounding box and afterwards the volume gets scaled in a way, that the longest side of the bounding box equals a length of 1.0.</p>
+<h2 id="z-values-and-depth-buffer"><a class="header" href="#z-values-and-depth-buffer">Z-Values and Depth Buffer</a></h2>
+<p><code>Z-Values</code> represent the distance of a pixel from the camera in projection coordinates. The near clipping plane is set to <strong>0.1</strong> and the far clipping plane is set to <strong>10.0</strong> which results in a in far-plane/near-plane ratio of 100. At a ratio of 100, 90 percent of the precision range is spent on the first 10 percent of the depth range (<a href="https://learn.microsoft.com/en-us/windows/win32/direct3d9/depth-buffers">D3D Docs</a>). This is suitable for all volume renderers of VDS, since the bounding box of the volume data is always normalized due to the <a href="render_backend.html#3d-volume-scaling">3D Volume Scaling</a>.</p>
+<p>The <code>Depth Buffer</code> contains depth values between 0.0 and 1.0, where 0.0 is the closest distance and 1.0 is the furthest distance. All Z-Values get mapped from the range of the near-plane - far-plane to the range of 0.0 - 1.0 respectively. VDS uses <a href="https://docs.rs/wgpu/latest/wgpu/enum.TextureFormat.html#variant.Depth32Float">wgpu::TextureFormat::Depth32Float</a> for the depth buffer.</p>
+<h3 id="depth-buffer-and-ray-marching"><a class="header" href="#depth-buffer-and-ray-marching">Depth Buffer and Ray Marching</a></h3>
+<p>The depth of each pixel is set to first sample point the ray that exceeds the threshold value.</p>
+<p>For non-translusent visualization methods like &quot;First Hit&quot; the depth value is set accordingly to the visible surface shown on the screen.</p>
+<p>For translusent visualisation methods like &quot;Accumulate&quot; the depth value is set accordingly to the first visible layer shown on the screen, even if it extremely translucent and barly visible. This is due to the fact that depth values are assigned to a pixel, while the pixel color value is calculated by accumulating all the samples in the raymarching ray.</p>
+<!-- TODO: Visual debugging
+## Visual Debugging
+
+### Coordinates
+Visualise position in 3D space with RGB to determine correct orientation in the 3D space coordinate system. Different options are:
+- texture coordinates
+- bounding box coordinates
+- world coordinates
+- projection coordinates
+- global egui viewport coordinates
+- tab view viewport coordinates
+
+### Depth Buffer
+
+
+### Gradients & Normal Map -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="development"><a class="header" href="#development">Development</a></h1>
+<p>VDS is written in <a href="https://www.rust-lang.org/">Rust</a> and shaders are written in <a href="https://www.w3.org/TR/WGSL/">WGSL</a>.</p>
+<p>Make sure you are using the latest version of stable rust by running <code>rustup update</code>. VDS requires a proper graphics driver that provides at least one of the <a href="development.html#cross-platform-support">supported graphics APIs</a>.</p>
+<h2 id="building-from-source-for-native"><a class="header" href="#building-from-source-for-native">Building from Source for Native</a></h2>
+<p>Run it locally with <code>cargo run --release</code>.</p>
+<p>On Linux you need to first run:</p>
+<p><code>sudo apt-get install libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev libssl-dev</code></p>
+<p>On Fedora Rawhide you need to run:</p>
+<p><code>dnf install clang clang-devel clang-tools-extra libxkbcommon-devel pkg-config openssl-devel libxcb-devel gtk3-devel atk fontconfig-devel</code></p>
+<h2 id="building-from-source-for-web"><a class="header" href="#building-from-source-for-web">Building from Source for Web</a></h2>
+<p><a href="https://trunkrs.dev/">Trunk</a> can be used to compile <code>vds</code> to WASM and spin up a web server with hot reloading.</p>
+<ol>
+<li>Install Trunk with <code>cargo install --locked trunk</code>.</li>
+<li>Run <code>trunk serve</code> to build and serve on <code>http://127.0.0.1:8080</code>. Trunk will rebuild automatically if you edit the project.</li>
+<li>Open <code>http://127.0.0.1:8080/index.html#dev</code> in a browser. See the warning below.</li>
+</ol>
+<blockquote>
+<p><code>assets/sw.js</code> script will try to cache our VDS app, and loads the cached version when it cannot connect to server allowing VDS to work offline (like PWA). Appending <code>#dev</code> to <code>index.html</code> will skip this caching, allowing to load the latest builds during development.</p>
+</blockquote>
+<h2 id="deploy-for-web"><a class="header" href="#deploy-for-web">Deploy for Web</a></h2>
+<ol>
+<li>Just run <code>trunk build --release</code>.</li>
+<li>It will generate a <code>dist</code> directory as a &quot;static html&quot; website</li>
+<li>Upload the <code>dist</code> directory to any of the numerous free hosting websites including <a href="https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">GitHub Pages</a>.</li>
+<li>This repo already provides a <a href=".github/workflows/deploy_github_pages.yml">workflow</a> that auto-deploys VDS to GitHub pages.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
